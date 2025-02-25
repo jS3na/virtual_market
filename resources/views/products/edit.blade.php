@@ -32,6 +32,7 @@
 
         <label for="category_id">
             <select name="category_id" value="{{ $product->category_id }}">
+                <option value="">No Category</option>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

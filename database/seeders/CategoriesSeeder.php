@@ -15,6 +15,9 @@ class CategoriesSeeder extends Seeder
     {
         $categories = [
             [
+                'name' => 'Other'
+            ],
+            [
                 'name' => 'Type 1'
             ],
             [

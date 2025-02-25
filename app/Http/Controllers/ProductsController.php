@@ -86,7 +86,6 @@ class ProductsController extends Controller
             'name' => 'required|min:3|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'category_id' => 'required'
         ], [
             'name.required' => 'The product name is required.',
             'name.min' => 'The product name must have at least :min characters.',
@@ -95,7 +94,6 @@ class ProductsController extends Controller
             'price.numeric' => 'The product price must be a numeric.',
             'stock.required' => 'The product stock is required.',
             'stock.integer' => 'The product stock must be a integer.',
-            'category_id' => 'The category is required.'
         ]);
 
         $name = $request->input('name');
