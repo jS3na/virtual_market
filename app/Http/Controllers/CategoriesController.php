@@ -28,9 +28,9 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:100',
         ], [
-            'name.required' => 'The product name is required.',
-            'name.min' => 'The product name must have at least :min characters.',
-            'name.max' => 'The product name must have at most :max characters.'
+            'name.required' => 'The category name is required.',
+            'name.min' => 'The category name must have at least :min characters.',
+            'name.max' => 'The category name must have at most :max characters.'
         ]);
 
         $name = $request->input('name');
@@ -45,17 +45,14 @@ class CategoriesController extends Controller
     public function editPage($category_id)
     {
 
-        // $category = Category::where('id', $category_id)->first();
+        $category = Category::where('id', $category_id)->first();
 
-        // if(!$category) return redirect()->back();
+        if(!$category) return redirect()->back();
         
-        // return view('categories.edit', [
-        //     'category' => $category,
-        // ]);
+        return view('categories.edit', [
+            'category' => $category,
+        ]);
 
-        $user = Auth::user();
-        $permissions = $user->role->permissions;
-        dd($permissions);
     }
 
     public function editCategory(Request $request, $category_id)
@@ -68,9 +65,9 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:100',
         ], [
-            'name.required' => 'The product name is required.',
-            'name.min' => 'The product name must have at least :min characters.',
-            'name.max' => 'The product name must have at most :max characters.',
+            'name.required' => 'The category name is required.',
+            'name.min' => 'The category name must have at least :min characters.',
+            'name.max' => 'The category name must have at most :max characters.',
         ]);
 
         $name = $request->input('name');
