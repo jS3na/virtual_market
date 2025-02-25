@@ -1,6 +1,6 @@
 <x-main_layout pageTitle="Login">
 
-    <form action="{{ route('login') }}" method="post">
+    <form action="{{ route('login.post') }}" method="post">
 
         @csrf
 

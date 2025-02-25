@@ -1,6 +1,6 @@
 <x-main_layout pageTitle="Register">
 
-    <form action="{{ route('register') }}" method="post">
+    <form action="{{ route('register.post') }}" method="post">
 
         @csrf
 
