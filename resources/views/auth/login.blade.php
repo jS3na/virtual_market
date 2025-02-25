@@ -25,7 +25,5 @@
 
         <button type="submit">Login</button>
     </form>
-    
-    <a href="{{ route('register') }}">Register</a>
 
 </x-main_layout>

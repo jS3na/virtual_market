@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
 use Database\Seeders\RolesSeed;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['check_permission:products.delete'])->group(function () {
             Route::delete('/{product_id}', [ProductsController::class, 'deleteProduct'])->name('products.delete');
         });
-
     });
 
     Route::prefix('categories')->group(function () {
@@ -49,7 +49,6 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['check_permission:categories.delete'])->group(function () {
             Route::delete('/{category_id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
         });
-
     });
 
     Route::prefix('roles')->group(function () {
@@ -68,7 +67,27 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['check_permission:roles.delete'])->group(function () {
             Route::delete('/{role_id}', [RolesController::class, 'deleteRole'])->name('roles.delete');
         });
+    });
 
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UsersController::class, 'page'])->name('users');
+
+        Route::get('/change_password', [UsersController::class, 'changePasswordPage'])->name('user.change_password');
+        Route::put('/change_password', [UsersController::class, 'changeUserPassword'])->name('users.change_password.post');
+
+        Route::middleware(['check_permission:users.create'])->group(function () {
+            Route::get('/add', [UsersController::class, 'addPage'])->name('users.add');
+            Route::post('/add', [UsersController::class, 'addUser'])->name('users.add.post');
+        });
+
+        Route::middleware(['check_permission:users.update'])->group(function () {
+            Route::get('/edit/{user_id}', [UsersController::class, 'editPage'])->name('users.edit');
+            Route::put('/edit/{user_id}', [UsersController::class, 'editUser'])->name('users.edit.post');
+        });
+
+        Route::middleware(['check_permission:users.delete'])->group(function () {
+            Route::delete('/{user_id}', [UsersController::class, 'deleteUser'])->name('users.delete');
+        });
     });
 
 });
@@ -76,7 +95,4 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
-    Route::get('/register', [AuthController::class, 'registerPage'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
