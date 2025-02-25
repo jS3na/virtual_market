@@ -18,13 +18,13 @@ class UsersSeed extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('senha'),
-                'role_id' => 1
+                'role_id' => 2
             ],
             [
                 'name' => 'products',
                 'email' => 'products@gmail.com',
                 'password' => bcrypt('senha'),
-                'role_id' => 2
+                'role_id' => 3
             ],
         ];
 
