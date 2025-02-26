@@ -12,10 +12,27 @@ class RolesController extends Controller
 {
     public function page()
     {
-        $roles = Role::all();
+        $roles = Role::paginate(15);
 
         return view('roles.roles', [
             'roles' => $roles
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Role::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $roles = $query->paginate(15);
+
+        return view('roles.roles', [
+            'roles' => $roles,
         ]);
     }
 
@@ -85,8 +102,8 @@ class RolesController extends Controller
             $role_permission = RolePermission::where('role_id', $role->id)
                 ->where('permission_id', $permission->id)->first();
 
-            if($role_permission && !$permission_check_field) $role_permission->delete();
-            elseif(!$role_permission && $permission_check_field){
+            if ($role_permission && !$permission_check_field) $role_permission->delete();
+            elseif (!$role_permission && $permission_check_field) {
                 $role_permission = new RolePermission();
                 $role_permission->role_id = $role->id;
                 $role_permission->permission_id = $permission->id;

@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('roles')->group(function () {
         Route::get('/', [RolesController::class, 'page'])->name('roles');
+        Route::get('/search', [RolesController::class, 'search'])->name('roles.search');
 
         Route::middleware(['check_permission:roles.create'])->group(function () {
             Route::get('/add', [RolesController::class, 'addPage'])->name('roles.add');
@@ -75,9 +76,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [UsersController::class, 'page'])->name('users');
         Route::get('/search', [UsersController::class, 'search'])->name('users.search');
 
-        Route::get('/change_password', [UsersController::class, 'changePasswordPage'])->name('user.change_password');
-        Route::put('/change_password', [UsersController::class, 'changeUserPassword'])->name('users.change_password.post');
-
         Route::middleware(['check_permission:users.create'])->group(function () {
             Route::get('/add', [UsersController::class, 'addPage'])->name('users.add');
             Route::post('/add', [UsersController::class, 'addUser'])->name('users.add.post');
@@ -91,6 +89,13 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['check_permission:users.delete'])->group(function () {
             Route::delete('/{user_id}', [UsersController::class, 'deleteUser'])->name('users.delete');
         });
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [UsersController::class, 'profilePage'])->name('profile');
+
+        Route::get('/change_password', [UsersController::class, 'changePasswordPage'])->name('profile.change_password');
+        Route::put('/change_password', [UsersController::class, 'changeUserPassword'])->name('profile.change_password.post');
     });
 
 });

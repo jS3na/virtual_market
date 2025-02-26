@@ -21,6 +21,11 @@ class UsersController extends Controller
         ]);
     }
 
+    public function profilePage()
+    {
+        return view('profile.profile');
+    }
+
     public function search(Request $request)
     {
         $search = $request->input('search');
@@ -125,7 +130,7 @@ class UsersController extends Controller
 
     public function changePasswordPage()
     {
-        return view('users.change_password');
+        return view('profile.change_password');
     }
 
     public function changeUserPassword(Request $request)
