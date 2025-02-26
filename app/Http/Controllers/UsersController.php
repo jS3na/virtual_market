@@ -12,10 +12,36 @@ class UsersController extends Controller
 {
     public function page()
     {
-        $users = User::all();
+        $users = User::paginate(15);
+        $roles = Role::all();
 
         return view('users.users', [
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $role_id = $request->input('role_id');
+
+        $query = User::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        if ($role_id) {
+            $query->where('role_id', $role_id === 'none' ? null : $role_id);
+        }
+
+        $users = $query->paginate(15);
+        $roles = Role::all();
+
+        return view('users.users', [
+            'users' => $users,
+            'roles' => $roles
         ]);
     }
 

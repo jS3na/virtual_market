@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UsersController::class, 'page'])->name('users');
+        Route::get('/search', [UsersController::class, 'search'])->name('users.search');
 
         Route::get('/change_password', [UsersController::class, 'changePasswordPage'])->name('user.change_password');
         Route::put('/change_password', [UsersController::class, 'changeUserPassword'])->name('users.change_password.post');

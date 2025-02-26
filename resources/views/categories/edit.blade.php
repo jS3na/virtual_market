@@ -6,9 +6,7 @@
         </div>
 
         <div class="flex gap-4">
-            @can('has_permissions', 'categories.create')
             <a class="ml-2 px-4 py-2 bg-red-900 text-white rounded-md hover:bg-red-500" href="{{ route('categories') }}">Back</a>
-            @endcan
         </div>
     </div>
 

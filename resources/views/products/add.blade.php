@@ -1,4 +1,4 @@
-<x-main_layout pageTitle="new Product">
+<x-main_layout pageTitle="New Product">
 
     <div class="flex flex-col md:flex-row items-center justify-between px-4 py-6">
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 w-full">
@@ -6,9 +6,7 @@
         </div>
 
             <div class="flex gap-4">
-                @can('has_permissions', 'products.create')
                 <a class="ml-2 px-4 py-2 bg-red-900 text-white rounded-md hover:bg-red-500" href="{{ route('products') }}">Back</a>
-                @endcan
             </div>
     </div>
 
