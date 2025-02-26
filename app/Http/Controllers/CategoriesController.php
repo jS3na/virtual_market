@@ -11,10 +11,27 @@ class CategoriesController extends Controller
 {
     public function page()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(15);
 
         return view('categories.categories', [
             'categories' => $categories
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Category::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $categories = $query->paginate(15);
+
+        return view('categories.categories', [
+            'categories' => $categories,
         ]);
     }
 

@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoriesController::class, 'page'])->name('categories');
+        Route::get('/search', [CategoriesController::class, 'search'])->name('categories.search');
 
         Route::middleware(['check_permission:categories.create'])->group(function () {
             Route::get('/add', [CategoriesController::class, 'addPage'])->name('categories.add');

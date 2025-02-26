@@ -1,4 +1,4 @@
-<x-main_layout pageTitle="Add Product">
+<x-main_layout pageTitle="new Product">
 
     <div class="flex flex-col md:flex-row items-center justify-between px-4 py-6">
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 w-full">

@@ -60,6 +60,9 @@
                     <th scope="col" class="px-6 py-3">
                         Stock
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Creation date
+                    </th>
                     @if(Gate::allows('has_permissions', 'products.update') || Gate::allows('has_permissions', 'products.delete'))
                     <th scope="col" class="px-6 py-3">Action</th>
                     @endif
@@ -88,6 +91,13 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $product->stock }}
+                    </td>
+                    <td class="px-6 py-4">
+                        @if ($product->created_at)
+                        {{ date('d-m-Y | H:i:s', strtotime($product->created_at)) }}
+                        @else
+                        None
+                        @endif
                     </td>
                     <td class="px-6 py-4 flex flex-row gap-4">
                         @can('has_permissions', 'products.update')
