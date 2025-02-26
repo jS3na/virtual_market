@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->text('permissions_list');
+            $table->string('name', 100);
+            $table->text('permissions');
         });
     }
 

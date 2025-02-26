@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     protected $casts = [
-        'permissions_list' => 'array'
+        'permissions' => 'array'
     ];
 
     public function role(){

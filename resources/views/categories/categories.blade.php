@@ -1,3 +1,5 @@
+<x-main_layout pageTitle="Categories">
+
 <div>
     <ul>
         @foreach ($categories as $category)
@@ -14,3 +16,5 @@
         @endforeach
     </ul>
 </div>
+
+</x-main_layout>

@@ -13,20 +13,17 @@ class ProductsSeeder extends Seeder
      */
     public function run(): void
     {
-        $products = [
-            [
-                'name' => 'Product Type 1',
-                'price' => '12.22',
+
+        $products = array();
+
+        for ($i = 0; $i < 50; $i++) {
+            $products[] = [
+                'name' => "Product {$i}",
+                'price' => '12',
                 'stock' => '13',
-                'category_id' => 2
-            ],
-            [
-                'name' => 'Product Type 2',
-                'price' => '90.13',
-                'stock' => '55',
-                'category_id' => 3
-            ]
-        ];
+                'category_id' => 1
+            ];
+        }
 
         DB::table('products')->insert($products);
     }

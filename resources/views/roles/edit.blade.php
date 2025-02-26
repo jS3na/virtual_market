@@ -22,9 +22,7 @@
         <label for="{{ $permission->id }}">
         <input type="checkbox" name="{{ $permission->id }}" {{ $role->permissions->contains('id', $permission->id) ? 'checked' : '' }}>
 
-            @foreach ($permission->permissions_list as $permission_item)
-            <p>{{ $permission_item }}</p>
-            @endforeach
+            <p>{{ $permission->name }}</p>
 
             @error('name')
             <div class="text-danger">{{ $message }}</div>

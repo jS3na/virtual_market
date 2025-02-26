@@ -6,15 +6,42 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class ProductsController extends Controller
 {
     public function page()
     {
-        $products = Product::all();
+        $products = Product::paginate(15);
+        $categories = Category::all();
 
         return view('products.products', [
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $category_id = $request->input('category_id');
+
+        $query = Product::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        if ($category_id) {
+            $query->where('category_id', $category_id === 'none' ? null : $category_id);
+        }
+
+        $products = $query->paginate(15);
+        $categories = Category::all();
+
+        return view('products.products', [
+            'products' => $products,
+            'categories' => $categories
         ]);
     }
 
@@ -32,7 +59,6 @@ class ProductsController extends Controller
             'name' => 'required|min:3|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'category_id' => 'required'
         ], [
             'name.required' => 'The product name is required.',
             'name.min' => 'The product name must have at least :min characters.',
@@ -41,7 +67,6 @@ class ProductsController extends Controller
             'price.numeric' => 'The product price must be a numeric.',
             'stock.required' => 'The product stock is required.',
             'stock.integer' => 'The product stock must be a integer.',
-            'category_id' => 'The category is required.'
         ]);
 
         $name = $request->input('name');
@@ -66,9 +91,9 @@ class ProductsController extends Controller
         $categories = Category::all();
         $product = Product::where('id', $product_id)->first();
 
-        
-        if(!$product) return redirect()->back();
-        
+
+        if (!$product) return redirect()->back();
+
         return view('products.edit', [
             'categories' => $categories,
             'product' => $product
@@ -80,7 +105,7 @@ class ProductsController extends Controller
 
         $product = Product::where('id', $product_id)->first();
 
-        if(!$product) return redirect()->back();
+        if (!$product) return redirect()->back();
 
         $request->validate([
             'name' => 'required|min:3|max:100',
@@ -112,9 +137,10 @@ class ProductsController extends Controller
         return redirect(route('products'));
     }
 
-    public function deleteProduct($product_id){
+    public function deleteProduct($product_id)
+    {
         $product = Product::where('id', $product_id)->first();
-        if(!$product) return redirect()->back();
+        if (!$product) return redirect()->back();
 
         $product->delete();
         return redirect(route('products'));

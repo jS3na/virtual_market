@@ -20,7 +20,7 @@ class CheckPermission
         if (Auth::check()) {
             $user = Auth::user();
             
-            if ($user->role && $user->role->permissions()->where('permissions_list', 'LIKE', "%{$permission}%")->exists()) {
+            if ($user->role && $user->role->permissions()->where('permissions', 'LIKE', "%{$permission}%")->exists()) {
                 return $next($request);
             }
         }

@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductsController::class, 'page'])->name('products');
+        Route::get('/search', [ProductsController::class, 'search'])->name('products.search');
 
         Route::middleware(['check_permission:products.create'])->group(function () {
             Route::get('/add', [ProductsController::class, 'addPage'])->name('products.add');

@@ -14,20 +14,18 @@ class PermissionsSeed extends Seeder
     public function run(): void
     {
         $permissions = [
-            [
-                'permissions_list' => '["products.create","products.update","products.delete"]'
-            ],
-            [
-                'permissions_list' => '["categories.create","categories.update","categories.delete"]'
-            ],
-            [
-                'permissions_list' => '["users.create","users.update","users.delete"]'
-            ],
-            [
-                'permissions_list' => '["roles.create","roles.update","roles.delete"]'
-            ]
+            'products.create', 'products.update', 'products.delete',
+            'categories.create', 'categories.update', 'categories.delete',
+            'users.create', 'users.update', 'users.delete',
+            'roles.create', 'roles.update', 'roles.delete'
         ];
-
-        DB::table('permissions')->insert($permissions);
+        
+        foreach ($permissions as $permission) {
+            $permission_split = explode(".", $permission);
+            DB::table('permissions')->insert([
+                'name' => strtoupper($permission_split[1]) . ' ' . strtoupper($permission_split[0]),
+                'permissions' => json_encode([$permission])
+            ]);
+        }
     }
 }
