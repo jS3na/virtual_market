@@ -6,8 +6,6 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
-use Database\Seeders\RolesSeed;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
