@@ -14,10 +14,10 @@ class PermissionsSeed extends Seeder
     public function run(): void
     {
         $permissions = [
-            'products.create', 'products.update', 'products.delete',
-            'categories.create', 'categories.update', 'categories.delete',
-            'users.create', 'users.update', 'users.delete',
-            'roles.create', 'roles.update', 'roles.delete'
+            'products.create', 'products.update', 'products.delete', 'products.read',
+            'categories.create', 'categories.update', 'categories.delete', 'categories.read',
+            'users.create', 'users.update', 'users.delete', 'users.read',
+            'roles.create', 'roles.update', 'roles.delete', 'roles.read'
         ];
         
         foreach ($permissions as $permission) {

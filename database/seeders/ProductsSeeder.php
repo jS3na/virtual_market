@@ -20,7 +20,7 @@ class ProductsSeeder extends Seeder
             $products[] = [
                 'name' => "Product {$i}",
                 'price' => '12',
-                'stock' => '13',
+                'stock' => $i,
                 'category_id' => 1
             ];
         }

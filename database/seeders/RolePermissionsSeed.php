@@ -13,7 +13,7 @@ class RolePermissionsSeed extends Seeder
      */
     public function run(): void
     {
-        $permissions = range(1, 12);
+        $permissions = range(1, 16);
         $role_id = 2;
 
         foreach ($permissions as $permission_id) {
